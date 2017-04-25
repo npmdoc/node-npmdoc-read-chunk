@@ -1,6 +1,6 @@
 # npmdoc-read-chunk
 
-#### api documentation for  [read-chunk (v2.0.0)](https://github.com/sindresorhus/read-chunk#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-read-chunk.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-read-chunk) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-read-chunk.svg)](https://travis-ci.org/npmdoc/node-npmdoc-read-chunk)
+#### basic api documentation for  [read-chunk (v2.0.0)](https://github.com/sindresorhus/read-chunk#readme)  [![npm package](https://img.shields.io/npm/v/npmdoc-read-chunk.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-read-chunk) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-read-chunk.svg)](https://travis-ci.org/npmdoc/node-npmdoc-read-chunk)
 
 #### Read a chunk from a file
 
@@ -81,7 +81,8 @@
     "version": "2.0.0",
     "xo": {
         "esnext": true
-    }
+    },
+    "bin": {}
 }
 ```
 
