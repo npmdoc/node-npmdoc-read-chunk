@@ -65,8 +65,39 @@
 
         <li>
 
+            <a class="apidocElementLiA" href="#apidoc.element.read-chunk.index">
+            function <span class="apidocSignatureSpan">read-chunk.</span>index
+            <span class="apidocSignatureSpan">(filepath, pos, len)</span>
+            </a>
+
+        </li>
+
+        <li>
+
             <a class="apidocElementLiA" href="#apidoc.element.read-chunk.sync">
             function <span class="apidocSignatureSpan">read-chunk.</span>sync
+            <span class="apidocSignatureSpan">(filepath, pos, len)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.read-chunk.index">module read-chunk.index</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.read-chunk.index.index">
+            function <span class="apidocSignatureSpan">read-chunk.</span>index
+            <span class="apidocSignatureSpan">(filepath, pos, len)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.read-chunk.index.sync">
+            function <span class="apidocSignatureSpan">read-chunk.index.</span>sync
             <span class="apidocSignatureSpan">(filepath, pos, len)</span>
             </a>
 
@@ -114,8 +145,121 @@
 
 
     <h2>
+        <a href="#apidoc.element.read-chunk.index" id="apidoc.element.read-chunk.index">
+        function <span class="apidocSignatureSpan">read-chunk.</span>index
+        <span class="apidocSignatureSpan">(filepath, pos, len)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">(filepath, pos, len) =&gt; {
+	const buf = new Buffer(len);
+
+	return fsP.open(filepath, 'r')
+		.then(fd =&gt;
+			fsReadP(fd, buf, 0, len, pos)
+				.then(readArgs =&gt; fsP.close(fd)
+					.then(() =&gt; readArgs))
+		)
+		.then(readArgs =&gt; {
+			// TODO: use destructuring when Node.js 6 is target
+			const bytesRead = readArgs[0];
+			let buf = readArgs[1];
+
+			if (bytesRead &lt; len) {
+				buf = buf.slice(0, bytesRead);
+			}
+
+			return buf;
+		});
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
         <a href="#apidoc.element.read-chunk.sync" id="apidoc.element.read-chunk.sync">
         function <span class="apidocSignatureSpan">read-chunk.</span>sync
+        <span class="apidocSignatureSpan">(filepath, pos, len)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">(filepath, pos, len) =&gt; {
+	let buf = new Buffer(len);
+
+	const fd = fs.openSync(filepath, 'r');
+	const bytesRead = fs.readSync(fd, buf, 0, len, pos);
+
+	fs.closeSync(fd);
+
+	if (bytesRead &lt; len) {
+		buf = buf.slice(0, bytesRead);
+	}
+
+	return buf;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+## Usage
+
+```js
+const readChunk = require('read-chunk');
+
+// foo.txt =&gt; hello
+
+readChunk.<span class="apidocCodeKeywordSpan">sync</span>('foo.txt', 1, 3);
+//=&gt; 'ell'
+```
+
+
+## API
+
+### readChunk(filepath, position, length)
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.read-chunk.index" id="apidoc.module.read-chunk.index">module read-chunk.index</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.read-chunk.index.index" id="apidoc.element.read-chunk.index.index">
+        function <span class="apidocSignatureSpan">read-chunk.</span>index
+        <span class="apidocSignatureSpan">(filepath, pos, len)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">(filepath, pos, len) =&gt; {
+	const buf = new Buffer(len);
+
+	return fsP.open(filepath, 'r')
+		.then(fd =&gt;
+			fsReadP(fd, buf, 0, len, pos)
+				.then(readArgs =&gt; fsP.close(fd)
+					.then(() =&gt; readArgs))
+		)
+		.then(readArgs =&gt; {
+			// TODO: use destructuring when Node.js 6 is target
+			const bytesRead = readArgs[0];
+			let buf = readArgs[1];
+
+			if (bytesRead &lt; len) {
+				buf = buf.slice(0, bytesRead);
+			}
+
+			return buf;
+		});
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.read-chunk.index.sync" id="apidoc.element.read-chunk.index.sync">
+        function <span class="apidocSignatureSpan">read-chunk.index.</span>sync
         <span class="apidocSignatureSpan">(filepath, pos, len)</span>
         </a>
     </h2>
